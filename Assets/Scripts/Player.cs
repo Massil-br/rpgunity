@@ -58,7 +58,7 @@ public class Player : MonoBehaviour
             AttackDamage *= (int)NextLevelRatio;
 
             if (_levelCount ==10){
-                GetComponent<Attack>().AttackCoolDown -= 0.1f;
+                GetComponent<Attack>().AttackCoolDown *= 0.9f;
                 _levelCount = 0;
             }
         }
