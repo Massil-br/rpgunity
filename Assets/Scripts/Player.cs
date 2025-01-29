@@ -1,4 +1,5 @@
 using System.Xml.XPath;
+using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 
 public class Player : MonoBehaviour
@@ -13,6 +14,7 @@ public class Player : MonoBehaviour
     public int Xp;
     public int NextLevelXp;
     public float NextLevelRatio;
+    private int _levelCount= 1;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -48,7 +50,17 @@ public class Player : MonoBehaviour
         if (Xp >= NextLevelXp){
             Xp -=NextLevelXp;
             Level++;
+            _levelCount++;
             NextLevelXp = (int)(NextLevelXp * NextLevelRatio);
+            int previousMaxHealth = MaxHealthPoint;
+            MaxHealthPoint *=(int) NextLevelRatio;
+            CurrentHealthPoint += MaxHealthPoint - previousMaxHealth;
+            AttackDamage *= (int)NextLevelRatio;
+
+            if (_levelCount ==10){
+                GetComponent<Attack>().AttackCoolDown -= 0.1f;
+                _levelCount = 0;
+            }
         }
     }
 
@@ -66,7 +78,7 @@ public class Player : MonoBehaviour
         if(Input.GetKey(KeyCode.LeftControl)&& Input.GetKeyDown(KeyCode.Keypad2)){
             GainHealth();
         }
-        if(Input.GetKey(KeyCode.LeftControl)&& Input.GetKeyDown(KeyCode.Keypad3)){
+        if(Input.GetKey(KeyCode.LeftControl)&& Input.GetKey(KeyCode.Keypad3)){
             GainXp();
         }
         
