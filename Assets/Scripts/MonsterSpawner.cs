@@ -51,6 +51,12 @@ public class MonsterSpawner : MonoBehaviour
             GameObject monster = Instantiate(PrefabMonster);
             monster.transform.position = new Vector3(Random.Range(transform.position.x-(bc.size.x/2),transform.position.x+(bc.size.x/2)),
             Random.Range(transform.position.y-(bc.size.x/2),transform.position.y+(bc.size.x/2)),0);
+
+            MonsterStats stats = monster.GetComponent<MonsterStats>();
+            stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth);
+            stats.CurrentHealth = stats.MaxHealth;
+            stats.AttackDamage = Random.Range(MinimumAttackDamage, maximumAttackDamage);
+
             _timer = 0;
         }
     }

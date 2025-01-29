@@ -11,7 +11,10 @@ public class MonsterStats : MonoBehaviour
 
 
     void Update(){
-        CheckHealth();
+        if (IsAlive){
+            CheckHealth();
+        }
+        
     }
 
 
