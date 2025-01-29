@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1c7c0912dd39144e9702e3a9ad04ec8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 1296975772997295086, guid: d24f1726046fb6243bd716a4b25d6f81, type: 3}
   MonstersLevel: 1
   MinimumHealth: 5
   MaximumHealth: 30

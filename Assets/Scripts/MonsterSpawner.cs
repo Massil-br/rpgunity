@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class MonsterSpawner : MonoBehaviour
 {   
+    public GameObject Player;
     public int MonstersLevel;
     public int MinimumHealth;
     public int MaximumHealth;
@@ -56,6 +57,7 @@ public class MonsterSpawner : MonoBehaviour
             stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth);
             stats.CurrentHealth = stats.MaxHealth;
             stats.AttackDamage = Random.Range(MinimumAttackDamage, maximumAttackDamage);
+            stats.Player = Player;
 
             _timer = 0;
         }

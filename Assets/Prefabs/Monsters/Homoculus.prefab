@@ -147,8 +147,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fc38832347840d44996a3da2518bff7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Player: {fileID: 0}
   CurrentHealth: 20
   MaxHealth: 20
   level: 1
   AttackDamage: 2
   IsAlive: 1
+  MinimumXpDrop: 2
+  MaximumXpDrop: 5
