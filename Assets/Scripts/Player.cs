@@ -6,6 +6,8 @@ public class Player : MonoBehaviour
     public bool IsAdmin;
     public int MaxHealthPoint;
     public int CurrentHealthPoint;
+
+    public int AttackDamage;
     public bool IsAlive;
     public int Level;
     public int Xp;

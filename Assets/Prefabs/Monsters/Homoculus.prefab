@@ -11,9 +11,10 @@ GameObject:
   - component: {fileID: 1025511846725606013}
   - component: {fileID: 3879760480450590087}
   - component: {fileID: 3960985872341192762}
+  - component: {fileID: 2208342195003625162}
   m_Layer: 0
   m_Name: Homoculus
-  m_TagString: Untagged
+  m_TagString: Monster
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -134,3 +135,20 @@ BoxCollider2D:
   m_AutoTiling: 0
   m_Size: {x: 0.49, y: 0.89}
   m_EdgeRadius: 0
+--- !u!114 &2208342195003625162
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3480050004347080161}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fc38832347840d44996a3da2518bff7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentHealth: 20
+  MaxHealth: 20
+  level: 1
+  AttackDamage: 2
+  IsAlive: 1
