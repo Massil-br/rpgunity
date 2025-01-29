@@ -1,19 +1,26 @@
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {   
 
+    public float AttackCoolDown = 3;
+
+    private float _timer;
+
     private List<GameObject> _targetableMonsters = new List<GameObject>();
 
-    Player player;
+    private Player _player;
 
 
 
     void Start(){
-        player = GetComponent<Player>();
+        _player = GetComponent<Player>();
     }
+
+
     private void OnTriggerEnter2D(Collider2D other) {
         if (other.gameObject.CompareTag("Monster") && !_targetableMonsters.Contains(other.gameObject))
         {
@@ -31,11 +38,15 @@ public class Attack : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Mouse0)){
+    {   
+        if (_timer >= 0 ){
+            _timer -= Time.deltaTime;
+        }
+        if (Input.GetKeyDown(KeyCode.Mouse0) &&  _timer <= 0){
             foreach (GameObject target in _targetableMonsters){
                 MonsterStats stats = target.GetComponent<MonsterStats>();
-                stats.CurrentHealth -= player.AttackDamage;
+                stats.CurrentHealth -= _player.AttackDamage;
+                _timer = 3;
             }
         }
     }
