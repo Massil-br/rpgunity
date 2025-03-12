@@ -43,10 +43,16 @@ public class Attack : MonoBehaviour
             _timer -= Time.deltaTime;
         }
         if (Input.GetKeyDown(KeyCode.Mouse0) &&  _timer <= 0){
+
+            _player.GetComponent<PlayerAnimationHandler>().PlayFireAttackAnimation();
+            _timer = 3;
+
             foreach (GameObject target in _targetableMonsters){
+                
                 MonsterStats stats = target.GetComponent<MonsterStats>();
+                target.GetComponent<MonsterAnimationHandler>().PlayTakeDamageAnimation();
                 stats.CurrentHealth -= _player.AttackDamage;
-                _timer = 3;
+               
             }
         }
     }

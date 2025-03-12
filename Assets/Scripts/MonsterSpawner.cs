@@ -10,14 +10,19 @@ public class MonsterSpawner : MonoBehaviour
     public int maximumAttackDamage;
     public string monsterName;
 
+    public int MonstersLimit;
+
     public GameObject PrefabMonster;
 
     public float SpawnInterval;
     public bool IsActive = false;
 
+    public  int MonstersOnMap = 0;
+
     private float _timer;
 
     private BoxCollider2D bc;
+    
     
     void Start(){
         bc = GetComponent<BoxCollider2D>();
@@ -48,10 +53,20 @@ public class MonsterSpawner : MonoBehaviour
             return;
         }
         _timer += Time.deltaTime;
-        if (_timer >= SpawnInterval){
+        if (_timer >= SpawnInterval && MonstersOnMap < MonstersLimit){
             GameObject monster = Instantiate(PrefabMonster);
+            MonstersOnMap++ ;
+            monster.GetComponent<MonsterStats>().Spawner = gameObject;
             monster.transform.position = new Vector3(Random.Range(transform.position.x-(bc.size.x/2),transform.position.x+(bc.size.x/2)),
             Random.Range(transform.position.y-(bc.size.x/2),transform.position.y+(bc.size.x/2)),0);
+
+
+            Canvas monsterCanvas = monster.GetComponentInChildren<Canvas>();
+            if (monsterCanvas != null)
+            {
+                // Attribuer la caméra principale au Canvas en mode World Space
+                monsterCanvas.worldCamera = Camera.main;
+            }
 
             MonsterStats stats = monster.GetComponent<MonsterStats>();
             stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth);

@@ -3,7 +3,7 @@ using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 
 public class Player : MonoBehaviour
-{   
+{
     public bool IsAdmin;
     public int MaxHealthPoint;
     public int CurrentHealthPoint;
@@ -14,50 +14,63 @@ public class Player : MonoBehaviour
     public int Xp;
     public int NextLevelXp;
     public float NextLevelRatio;
-    private int _levelCount= 1;
+    private int _levelCount = 1;
+
+    private float _healthRegenTimer = 0;
+    public float TimeBetweenHealthRegen = 0.5f;
+    public int healthRegenAmount = 5;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
-    {   
+    {
         IsAlive = true;
         Level = 1;
     }
 
     // Update is called once per frame
     void Update()
-    {
+    {   HealthRegen();
         CheckHealth();
         CheckLevelUp();
         AdminActions();
-
-        
     }
 
-
-
-    private void CheckHealth(){
-        if (CurrentHealthPoint <= 0){
+    private void CheckHealth()
+    {
+        if (CurrentHealthPoint <= 0)
+        {
             CurrentHealthPoint = 0;
             IsAlive = false;
         }
 
-        if (CurrentHealthPoint >= MaxHealthPoint){
+        if (CurrentHealthPoint >= MaxHealthPoint)
+        {
             CurrentHealthPoint = MaxHealthPoint;
         }
     }
 
-    private void CheckLevelUp(){
-        if (Xp >= NextLevelXp){
-            Xp -=NextLevelXp;
+    private void CheckLevelUp()
+    {
+        if (Xp >= NextLevelXp)
+        {
+            Xp -= NextLevelXp;
             Level++;
             _levelCount++;
             NextLevelXp = (int)(NextLevelXp * NextLevelRatio);
-            int previousMaxHealth = MaxHealthPoint;
-            MaxHealthPoint *=(int) NextLevelRatio;
-            CurrentHealthPoint += MaxHealthPoint - previousMaxHealth;
-            AttackDamage *= (int)NextLevelRatio;
 
-            if (_levelCount ==10){
+
+            // changer le level up pour choisir entre vitesse/ degats et hp avec une ui sur laquelle on clique
+
+            // Correctly update MaxHealthPoint and CurrentHealthPoint
+            int previousMaxHealth = MaxHealthPoint;
+            MaxHealthPoint = (int)(MaxHealthPoint * NextLevelRatio);
+            CurrentHealthPoint += MaxHealthPoint - previousMaxHealth;
+
+            // Correctly update AttackDamage
+            AttackDamage = (int)(AttackDamage * NextLevelRatio);
+
+            if (_levelCount == 10)
+            {
                 GetComponent<Attack>().AttackCoolDown *= 0.9f;
                 _levelCount = 0;
             }
@@ -65,50 +78,60 @@ public class Player : MonoBehaviour
     }
 
 
-    // Input.GetKeyDown(KeyCode.)
-    //Input.GetKey(KeyCode.LeftControl)
-    private void AdminActions(){
-        if (!IsAdmin){
+
+    private void HealthRegen(){
+        _healthRegenTimer += Time.deltaTime;
+        if (_healthRegenTimer >= TimeBetweenHealthRegen){
+            CurrentHealthPoint+= healthRegenAmount;
+            _healthRegenTimer = 0;
+        }
+
+     }
+
+    private void AdminActions()
+    {
+        if (!IsAdmin)
+        {
             return;
         }
 
-        if (Input.GetKey(KeyCode.LeftControl)&& Input.GetKeyDown(KeyCode.Keypad1) ){
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Keypad1))
+        {
             RemoveHealth();
         }
-        if(Input.GetKey(KeyCode.LeftControl)&& Input.GetKeyDown(KeyCode.Keypad2)){
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Keypad2))
+        {
             GainHealth();
         }
-        if(Input.GetKey(KeyCode.LeftControl)&& Input.GetKey(KeyCode.Keypad3)){
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Keypad3))
+        {
             GainXp();
         }
-        
-        if (Input.GetKey(KeyCode.LeftControl)&& Input.GetKeyDown(KeyCode.Keypad0)){
+
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Keypad0))
+        {
             Revive();
         }
-
-
     }
 
-
-    private void RemoveHealth(){
+    private void RemoveHealth()
+    {
         CurrentHealthPoint--;
     }
 
-    private void GainHealth(){
+    private void GainHealth()
+    {
         CurrentHealthPoint++;
     }
 
-    private void Revive(){
-        CurrentHealthPoint++;
-        IsAlive =true;
+    private void Revive()
+    {
+        CurrentHealthPoint = MaxHealthPoint; // Revive to full health
+        IsAlive = true;
     }
 
-    private void GainXp(){
+    private void GainXp()
+    {
         Xp++;
     }
-
-
-
-
-
 }

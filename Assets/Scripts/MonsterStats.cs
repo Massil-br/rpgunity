@@ -3,6 +3,12 @@ using UnityEngine;
 public class MonsterStats : MonoBehaviour
 {   
     public GameObject Player;
+
+    public GameObject Spawner;
+
+    [SerializeField]
+    GameObject HealthBarUi;
+
     public int CurrentHealth;
     public int MaxHealth;
     public int level;
@@ -12,10 +18,21 @@ public class MonsterStats : MonoBehaviour
     public int MinimumXpDrop;
     public int MaximumXpDrop;
 
-
+    void Start()
+    {
+        HealthBarUi.SetActive(false);
+    }
 
     void Update(){
         CheckHealthDropXp();
+        ActivateHealthUi();
+    }
+
+
+    void ActivateHealthUi(){
+        if (CurrentHealth < MaxHealth){
+            HealthBarUi.SetActive(true);
+        }
     }
 
 
@@ -28,6 +45,7 @@ public class MonsterStats : MonoBehaviour
             CurrentHealth = 0;
             IsAlive = false;
             Player.GetComponent<Player>().Xp += Random.Range(MinimumXpDrop,MaximumXpDrop);
+            Spawner.GetComponent<MonsterSpawner>().MonstersOnMap --;
             Destroy(gameObject);
         }
 
