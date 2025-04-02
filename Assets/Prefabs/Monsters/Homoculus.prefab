@@ -177,7 +177,6 @@ GameObject:
   - component: {fileID: 3879760480450590087}
   - component: {fileID: 3960985872341192762}
   - component: {fileID: 2208342195003625162}
-  - component: {fileID: 7957639293264191137}
   - component: {fileID: 2875140312624626716}
   - component: {fileID: -6063778221356760005}
   - component: {fileID: 6601429542371174447}
@@ -330,30 +329,9 @@ MonoBehaviour:
   AttackRange: 3
   ChaseRange: 5
   AttackCooldown: 4
+  Speed: 3
   ProjectilePrefab: {fileID: 5544876983179074101, guid: 475f7da1295df5246ae5687be1d2ec30, type: 3}
   ProjectileSpawnPoint: {fileID: 1025511846725606013}
---- !u!95 &7957639293264191137
-Animator:
-  serializedVersion: 7
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3480050004347080161}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: f717a25d6d58df44aaf2b1f083354735, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_StabilizeFeet: 0
-  m_AnimatePhysics: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorStateOnDisable: 0
-  m_WriteDefaultValuesOnDisable: 0
 --- !u!114 &2875140312624626716
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -437,7 +415,7 @@ Rigidbody2D:
     m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!1 &4239433460423380925
 GameObject:
