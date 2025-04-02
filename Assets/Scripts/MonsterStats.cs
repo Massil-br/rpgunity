@@ -15,11 +15,17 @@ public class MonsterStats : MonoBehaviour
     public float AttackRange = 5f;
     public float ChaseRange = 10f;
     public float AttackCooldown = 2f;
+    public float Speed  = 3f;
     public GameObject ProjectilePrefab;
     public Transform ProjectileSpawnPoint;
 
     private float lastAttackTime;
     private Transform playerTransform;
+
+    private Rigidbody2D _rigidbody;
+
+
+
 
     void Start()
     {
@@ -27,6 +33,8 @@ public class MonsterStats : MonoBehaviour
         IsAlive = true;
         CurrentHealth = MaxHealth;
         playerTransform = Player.transform;
+        _rigidbody = GetComponent<Rigidbody2D>();
+
     }
 
     void Update()
@@ -74,9 +82,20 @@ public class MonsterStats : MonoBehaviour
         }
     }
 
+    
     void ChasePlayer()
     {
-        transform.position = Vector2.MoveTowards(transform.position, playerTransform.position, 3f * Time.deltaTime);
+        if (_rigidbody == null) return;
+
+        // Calculer la direction vers le joueur
+        Vector2 direction = (playerTransform.position - transform.position).normalized;
+
+        // Appliquer une force dans la direction du joueur
+        _rigidbody.linearVelocity =direction * 3f;
+        
+        
+
+        
     }
 
     void Attack()
