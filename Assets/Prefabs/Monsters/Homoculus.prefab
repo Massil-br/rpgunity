@@ -287,7 +287,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
@@ -316,6 +316,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Player: {fileID: 0}
+  Spawner: {fileID: 0}
   HealthBarUi: {fileID: 4239433460423380925}
   CurrentHealth: 5
   MaxHealth: 5
@@ -324,6 +325,11 @@ MonoBehaviour:
   IsAlive: 1
   MinimumXpDrop: 1
   MaximumXpDrop: 5
+  AttackRange: 5
+  ChaseRange: 10
+  AttackCooldown: 4
+  ProjectilePrefab: {fileID: 5544876983179074101, guid: 475f7da1295df5246ae5687be1d2ec30, type: 3}
+  ProjectileSpawnPoint: {fileID: 1025511846725606013}
 --- !u!95 &7957639293264191137
 Animator:
   serializedVersion: 7

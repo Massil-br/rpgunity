@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Monster
   - UI
+  - Projectile
   layers:
   - Default
   - TransparentFX

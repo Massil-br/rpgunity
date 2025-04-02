@@ -17,9 +17,10 @@ GameObject:
   - component: {fileID: 574064294940690761}
   - component: {fileID: 5470988292703788025}
   - component: {fileID: 8048055375717852250}
+  - component: {fileID: -1095394081505997237}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -35,7 +36,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3340048301261557054}
   - {fileID: 2664531181168930505}
@@ -85,7 +86,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300018, guid: 9f95a2c744d652d42b966d6d0baa2416, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5446a95056812674b86075da346a7257, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -138,12 +139,14 @@ MonoBehaviour:
   IsAdmin: 1
   MaxHealthPoint: 50
   CurrentHealthPoint: 50
-  AttackDamage: 1
+  AttackDamage: 2
   IsAlive: 1
   Level: 1
   Xp: 0
   NextLevelXp: 20
   NextLevelRatio: 1.5
+  TimeBetweenHealthRegen: 5
+  healthRegenAmount: 1
 --- !u!114 &2405790241551160856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -157,6 +160,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Speed: 5
+  PlayerIdle:
+  - {fileID: 21300014, guid: 5446a95056812674b86075da346a7257, type: 3}
+  Playerhorizontal:
+  - {fileID: 21300000, guid: 5446a95056812674b86075da346a7257, type: 3}
+  - {fileID: 21300002, guid: 5446a95056812674b86075da346a7257, type: 3}
+  - {fileID: 21300004, guid: 5446a95056812674b86075da346a7257, type: 3}
+  PlayerUp:
+  - {fileID: 21300006, guid: 5446a95056812674b86075da346a7257, type: 3}
+  - {fileID: 21300008, guid: 5446a95056812674b86075da346a7257, type: 3}
+  - {fileID: 21300010, guid: 5446a95056812674b86075da346a7257, type: 3}
+  PlayerDown:
+  - {fileID: 21300012, guid: 5446a95056812674b86075da346a7257, type: 3}
+  - {fileID: 21300014, guid: 5446a95056812674b86075da346a7257, type: 3}
+  - {fileID: 21300016, guid: 5446a95056812674b86075da346a7257, type: 3}
+  PlayerDead:
+  - {fileID: 21300022, guid: 5446a95056812674b86075da346a7257, type: 3}
+  - {fileID: 21300018, guid: 5446a95056812674b86075da346a7257, type: 3}
 --- !u!114 &7330989496629357977
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +189,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f1a6d19ebd0ab14785b4ed8917455f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  AttackCoolDown: 0.5
+  LongDistAttackCoolDown: 2
+  CloseAttackCoolDown: 1
+  ProjectilePrefab: {fileID: 5544876983179074101, guid: 475f7da1295df5246ae5687be1d2ec30, type: 3}
+  ProjectileSpawnPoint: {fileID: 5967183009485022361}
 --- !u!70 &574064294940690761
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -256,6 +279,28 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
   m_Radius: 1.6
+--- !u!95 &-1095394081505997237
+Animator:
+  serializedVersion: 7
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296975772997295086}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 1de8200549ae77a449be14f880e607f9, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_AnimatePhysics: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &3808598015673195587
 GameObject:
   m_ObjectHideFlags: 0

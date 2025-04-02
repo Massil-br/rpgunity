@@ -1,59 +1,96 @@
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
 using UnityEngine;
 
 public class Attack : MonoBehaviour
 {   
+    public float LongDistAttackCoolDown = 2f;
+    public float CloseAttackCoolDown = 1f;
 
-    public float AttackCoolDown = 3;
-
-    private float _timer;
+    private float _longDistAttackTimer;
+    private float _closeAttackTimer;
 
     private List<GameObject> _targetableMonsters = new List<GameObject>();
-
     private Player _player;
 
+    public GameObject ProjectilePrefab;
+    public Transform ProjectileSpawnPoint; // Position de départ du projectile
 
-
-    void Start(){
+    void Start()
+    {
         _player = GetComponent<Player>();
     }
 
-
-    private void OnTriggerEnter2D(Collider2D other) {
+    private void OnTriggerEnter2D(Collider2D other)
+    {
         if (other.gameObject.CompareTag("Monster") && !_targetableMonsters.Contains(other.gameObject))
         {
             _targetableMonsters.Add(other.gameObject);
         }
     }
 
-
-    private void OnTriggerExit2D(Collider2D other) {
+    private void OnTriggerExit2D(Collider2D other)
+    {
         if (other.gameObject.CompareTag("Monster"))
         {
             _targetableMonsters.Remove(other.gameObject);
         }
     }
 
-    // Update is called once per frame
     void Update()
     {   
-        if (_timer >= 0 ){
-            _timer -= Time.deltaTime;
+        CloseAttack();
+        LongDistAttack();
+    }
+
+    private void CloseAttack()
+    {
+        if (_closeAttackTimer > 0)
+        {
+            _closeAttackTimer -= Time.deltaTime;
         }
-        if (Input.GetKeyDown(KeyCode.Mouse0) &&  _timer <= 0){
 
+        if (Input.GetKeyDown(KeyCode.Mouse1) && _closeAttackTimer <= 0)
+        {
             _player.GetComponent<PlayerAnimationHandler>().PlayFireAttackAnimation();
-            _timer = 3;
+            _closeAttackTimer = CloseAttackCoolDown;
 
-            foreach (GameObject target in _targetableMonsters){
-                
+            foreach (GameObject target in _targetableMonsters)
+            {
                 MonsterStats stats = target.GetComponent<MonsterStats>();
                 target.GetComponent<MonsterAnimationHandler>().PlayTakeDamageAnimation();
                 stats.CurrentHealth -= _player.AttackDamage;
-               
             }
         }
     }
+
+    private void LongDistAttack()
+    {
+        if (_longDistAttackTimer > 0)
+        {
+            _longDistAttackTimer -= Time.deltaTime;
+        }
+
+        if (Input.GetKeyDown(KeyCode.Mouse0) && _longDistAttackTimer <= 0)
+        {
+            _longDistAttackTimer = LongDistAttackCoolDown;
+            LaunchProjectile();
+        }
+    }
+
+    private void LaunchProjectile()
+{
+    Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+    GameObject projectile = Instantiate(ProjectilePrefab, transform.position, Quaternion.identity);
+    Projectile projectileScript = projectile.GetComponent<Projectile>();
+
+    if (projectileScript != null)
+    {
+        projectileScript.Initialize(mousePosition, _player.AttackDamage, "Player");
+    }
+    else
+    {
+        Debug.Log("!!! Cannot get Projectile component in projectile GameObject");
+    }
+}
+
 }

@@ -14,11 +14,10 @@ public class Player : MonoBehaviour
     public int Xp;
     public int NextLevelXp;
     public float NextLevelRatio;
-    private int _levelCount = 1;
 
     private float _healthRegenTimer = 0;
-    public float TimeBetweenHealthRegen = 0.5f;
-    public int healthRegenAmount = 5;
+    public float TimeBetweenHealthRegen ;
+    public int healthRegenAmount ;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -55,7 +54,6 @@ public class Player : MonoBehaviour
         {
             Xp -= NextLevelXp;
             Level++;
-            _levelCount++;
             NextLevelXp = (int)(NextLevelXp * NextLevelRatio);
 
 
@@ -69,17 +67,13 @@ public class Player : MonoBehaviour
             // Correctly update AttackDamage
             AttackDamage = (int)(AttackDamage * NextLevelRatio);
 
-            if (_levelCount == 10)
-            {
-                GetComponent<Attack>().AttackCoolDown *= 0.9f;
-                _levelCount = 0;
-            }
         }
     }
 
 
 
     private void HealthRegen(){
+        if (!IsAlive)return;
         _healthRegenTimer += Time.deltaTime;
         if (_healthRegenTimer >= TimeBetweenHealthRegen){
             CurrentHealthPoint+= healthRegenAmount;
@@ -103,7 +97,7 @@ public class Player : MonoBehaviour
         {
             GainHealth();
         }
-        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKeyDown(KeyCode.Keypad3))
+        if (Input.GetKey(KeyCode.LeftControl) && Input.GetKey(KeyCode.Keypad3))
         {
             GainXp();
         }
@@ -133,5 +127,16 @@ public class Player : MonoBehaviour
     private void GainXp()
     {
         Xp++;
+    }
+
+
+    public void TakeDamage(int damage)
+    {
+        CurrentHealthPoint -= damage;
+        if (CurrentHealthPoint <= 0)
+        {
+            IsAlive = false;
+            Debug.Log("you are dead");
+        }
     }
 }

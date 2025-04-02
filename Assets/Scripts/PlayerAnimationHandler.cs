@@ -4,6 +4,7 @@ using UnityEngine;
 public class PlayerAnimationHandler : MonoBehaviour
 {
     [SerializeField] GameObject FireAnimObject;
+    
     Animator animator;
     SpriteRenderer spriteRenderer;
 
@@ -29,9 +30,13 @@ public class PlayerAnimationHandler : MonoBehaviour
     IEnumerator DisableSpriteRendererAfterDelay()
     {
         // Wait for 0.5 seconds
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.3f);
 
         // Disable the SpriteRenderer
         spriteRenderer.enabled = false;
     }
+
+ 
+
+
 }
