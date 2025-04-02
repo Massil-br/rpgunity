@@ -21,6 +21,9 @@ public class Projectile : MonoBehaviour
         damage = attackDamage;
         float projectedSpeed = Vector2.Dot(originVelocity, direction);
         Speed += projectedSpeed;
+        if (originEntity == "Player"){
+            GetComponent<SpriteRenderer>().color = Color.blue;
+        }
         
 
         _collider = GetComponent<CircleCollider2D>();
