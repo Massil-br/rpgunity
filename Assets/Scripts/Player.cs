@@ -64,9 +64,24 @@ public class Player : MonoBehaviour
             MaxHealthPoint = (int)(MaxHealthPoint * NextLevelRatio);
             CurrentHealthPoint += MaxHealthPoint - previousMaxHealth;
 
+            
+
             // Correctly update AttackDamage
             AttackDamage = (int)(AttackDamage * NextLevelRatio);
 
+        }
+
+        if (Level >= 20){
+            GetComponent<Attack>().CloseAttackCoolDown = 0.5f;
+        }
+
+
+        if (Level >= 15){
+            GetComponent<Attack>().LongDistAttackCoolDown = 0.5f;
+        }else if (Level >= 10){
+            GetComponent<Attack>().LongDistAttackCoolDown = 1f;
+        }else if (Level >= 5){
+            GetComponent<Attack>().LongDistAttackCoolDown = 1.5f;
         }
     }
 

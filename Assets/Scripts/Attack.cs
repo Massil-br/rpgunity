@@ -14,10 +14,12 @@ public class Attack : MonoBehaviour
 
     public GameObject ProjectilePrefab;
     public Transform ProjectileSpawnPoint; // Position de départ du projectile
+    private Rigidbody2D _playerRigidBody;
 
     void Start()
     {
         _player = GetComponent<Player>();
+        _playerRigidBody = GetComponent<Rigidbody2D>();
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -85,7 +87,7 @@ public class Attack : MonoBehaviour
 
     if (projectileScript != null)
     {
-        projectileScript.Initialize(mousePosition, _player.AttackDamage, "Player");
+        projectileScript.Initialize(mousePosition, _player.AttackDamage, "Player", _playerRigidBody.linearVelocity);
     }
     else
     {
