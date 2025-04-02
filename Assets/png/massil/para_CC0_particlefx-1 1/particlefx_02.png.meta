@@ -1112,7 +1112,44 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      particlefx_02_0: -2241243091778648582
+      particlefx_02_1: 2660274157422620971
+      particlefx_02_10: 1461277803162411794
+      particlefx_02_11: 4906450717915376659
+      particlefx_02_12: 5734558966630701673
+      particlefx_02_13: -5764112025281561494
+      particlefx_02_14: 7901156230241279902
+      particlefx_02_15: 7346363662816870940
+      particlefx_02_16: 6890967632640035433
+      particlefx_02_17: -558465138820201645
+      particlefx_02_18: 2747718171273504833
+      particlefx_02_19: -3377916855012201384
+      particlefx_02_2: -7608045018851142349
+      particlefx_02_20: -722901997147695438
+      particlefx_02_21: 5718443212942124236
+      particlefx_02_22: 3022057243108020432
+      particlefx_02_23: 4898014615798250067
+      particlefx_02_24: -7204681246529928622
+      particlefx_02_25: 3099019516418307171
+      particlefx_02_26: 4887567246756914994
+      particlefx_02_27: -808940323263073878
+      particlefx_02_28: 570667012189140142
+      particlefx_02_29: -937957450452817021
+      particlefx_02_3: -8432910033816933967
+      particlefx_02_30: -8191809269528589594
+      particlefx_02_31: -8189107455279458391
+      particlefx_02_32: 3771310600551914461
+      particlefx_02_33: -1137175611594563613
+      particlefx_02_34: 1762723539668910039
+      particlefx_02_35: -5252954092657553814
+      particlefx_02_36: 676160095539414458
+      particlefx_02_4: 3412901260483757268
+      particlefx_02_5: 6535321940571996518
+      particlefx_02_6: -2399056988452245410
+      particlefx_02_7: -3978710579479064826
+      particlefx_02_8: 231343007613146660
+      particlefx_02_9: -8252164612936710650
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

@@ -212,7 +212,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      glowCircle_0: 3150547157567880597
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

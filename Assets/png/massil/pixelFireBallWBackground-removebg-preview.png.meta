@@ -212,7 +212,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      pixelFireBallWBackground-removebg-preview_0: 7791916064195318660
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
