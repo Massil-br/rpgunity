@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public float TimeBetweenHealthRegen ;
     public int healthRegenAmount ;
 
+    private PlayerUiHandler playerUiHandler;
+
     [SerializeField] bool RegenActivated  = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -26,6 +28,7 @@ public class Player : MonoBehaviour
     {
         IsAlive = true;
         Level = 1;
+        playerUiHandler = GetComponent<PlayerUiHandler>();
     }
 
     // Update is called once per frame
@@ -57,6 +60,7 @@ public class Player : MonoBehaviour
             Xp -= NextLevelXp;
             Level++;
             NextLevelXp = (int)(NextLevelXp * NextLevelRatio);
+            playerUiHandler.ShowLevelUp();
 
 
             // changer le level up pour choisir entre vitesse/ degats et hp avec une ui sur laquelle on clique
@@ -147,9 +151,17 @@ public class Player : MonoBehaviour
     }
 
 
+    public void AddXp(int amount){
+        Xp += amount;
+        playerUiHandler.ShowXpDropGained(amount);
+    }
+
+
     public void TakeDamage(int damage)
     {
         CurrentHealthPoint -= damage;
+        playerUiHandler.ShowHealthDamageTaken(damage);
+        
         if (CurrentHealthPoint <= 0)
         {
             IsAlive = false;

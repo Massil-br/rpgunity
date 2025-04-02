@@ -70,7 +70,7 @@ public class MonsterStats : MonoBehaviour
         {
             CurrentHealth = 0;
             IsAlive = false;
-            Player.GetComponent<Player>().Xp += Random.Range(MinimumXpDrop, MaximumXpDrop);
+            Player.GetComponent<Player>().AddXp(Random.Range(MinimumXpDrop, MaximumXpDrop));
             if (Spawner != null){
                 Spawner.GetComponent<MonsterSpawner>().MonstersOnMap--;
             }
