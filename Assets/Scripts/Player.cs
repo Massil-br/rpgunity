@@ -19,6 +19,8 @@ public class Player : MonoBehaviour
     public float TimeBetweenHealthRegen ;
     public int healthRegenAmount ;
 
+    [SerializeField] bool RegenActivated  = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -88,7 +90,7 @@ public class Player : MonoBehaviour
 
 
     private void HealthRegen(){
-        if (!IsAlive)return;
+        if (!IsAlive || !RegenActivated)return;
         _healthRegenTimer += Time.deltaTime;
         if (_healthRegenTimer >= TimeBetweenHealthRegen){
             CurrentHealthPoint+= healthRegenAmount;

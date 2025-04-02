@@ -71,7 +71,9 @@ public class MonsterStats : MonoBehaviour
             CurrentHealth = 0;
             IsAlive = false;
             Player.GetComponent<Player>().Xp += Random.Range(MinimumXpDrop, MaximumXpDrop);
-            Spawner.GetComponent<MonsterSpawner>().MonstersOnMap--;
+            if (Spawner != null){
+                Spawner.GetComponent<MonsterSpawner>().MonstersOnMap--;
+            }
             Destroy(gameObject);
             Debug.Log("Monster is dead");
         }
