@@ -60,7 +60,7 @@ public class Attack : MonoBehaviour
             {
                 MonsterStats stats = target.GetComponent<MonsterStats>();
                 target.GetComponent<MonsterAnimationHandler>().PlayTakeDamageAnimation();
-                stats.CurrentHealth -= _player.AttackDamage;
+                stats.CurrentHealth -= _player.AttackDamage; // miguel attack damage clic droit 
             }
         }
     }
@@ -87,7 +87,7 @@ public class Attack : MonoBehaviour
 
     if (projectileScript != null)
     {
-        projectileScript.Initialize(mousePosition, _player.AttackDamage, "Player", _playerRigidBody.linearVelocity);
+        projectileScript.Initialize(mousePosition, _player.AttackDamage, "Player", _playerRigidBody.linearVelocity); // miguel attaque damage du joueur
     }
     else
     {

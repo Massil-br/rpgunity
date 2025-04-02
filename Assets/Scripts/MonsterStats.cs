@@ -114,12 +114,15 @@ public class MonsterStats : MonoBehaviour
         if (projectileScript == null){
             Debug.Log("!!! cannot get Projectile component iin projectile gameObject");
         }else{
-            projectileScript.Initialize(playerTransform.position, AttackDamage, "Monster" , new Vector2(0,0));
+            projectileScript.Initialize(playerTransform.position, AttackDamage  , "Monster" , new Vector2(0,0)); // miguel pour l'attaque damage du monstre
             Debug.Log("Projectile successfully initialized");
         }
 
         
     }
+
+
+    
 
     public void TakeDamage(int damage)
     {
