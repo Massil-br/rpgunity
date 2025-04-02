@@ -48,19 +48,19 @@ public class PlayerControls : MonoBehaviour
             {
                 currentAnimation = PlayerDead;
             }
-            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) )
+            else if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.RightArrow))
             {
                 currentAnimation = Playerhorizontal;
-                if(Input.GetKey(KeyCode.A)){
+                if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow)){
                     playerSpriteRenderer.flipX = false;
                 }else{
                     playerSpriteRenderer.flipX = true;
                 }
             }
-            else if (Input.GetKey(KeyCode.S)){
+            else if (Input.GetKey(KeyCode.S)|| Input.GetKey(KeyCode.DownArrow)){
                 currentAnimation = PlayerDown;
                 
-            }else if(Input.GetKey(KeyCode.W )){
+            }else if(Input.GetKey(KeyCode.W ) || Input.GetKey(KeyCode.UpArrow)){
                 currentAnimation = PlayerUp;
             }
             else
