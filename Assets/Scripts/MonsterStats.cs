@@ -108,8 +108,4 @@ public class MonsterStats : MonoBehaviour
         
     }
 
-    void Die()
-    {
-        Destroy(gameObject);
-    }
 }
