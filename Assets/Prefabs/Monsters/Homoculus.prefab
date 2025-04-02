@@ -325,8 +325,8 @@ MonoBehaviour:
   IsAlive: 1
   MinimumXpDrop: 1
   MaximumXpDrop: 5
-  AttackRange: 5
-  ChaseRange: 10
+  AttackRange: 3
+  ChaseRange: 5
   AttackCooldown: 4
   ProjectilePrefab: {fileID: 5544876983179074101, guid: 475f7da1295df5246ae5687be1d2ec30, type: 3}
   ProjectileSpawnPoint: {fileID: 1025511846725606013}

@@ -3,7 +3,7 @@ using System.Collections;
 
 public class Projectile : MonoBehaviour
 {
-    public float Speed = 5f;
+    public float Speed = 8f;
     private Vector2 direction;
     private int damage;
     private string originEntity;
@@ -14,11 +14,14 @@ public class Projectile : MonoBehaviour
     private CircleCollider2D _collider;
     
 
-    public void Initialize(Vector2 targetPosition, int attackDamage, string origin)
+    public void Initialize(Vector2 targetPosition, int attackDamage, string origin, Vector2 originVelocity)
     {
         originEntity = origin;
         direction = (targetPosition - (Vector2)transform.position).normalized;
         damage = attackDamage;
+        float projectedSpeed = Vector2.Dot(originVelocity, direction);
+        Speed += projectedSpeed;
+        
 
         _collider = GetComponent<CircleCollider2D>();
         
@@ -67,6 +70,7 @@ public class Projectile : MonoBehaviour
             Debug.Log("Player hit! Damage: " + damage);
             Destroy(gameObject);
         }
+        
     }
 
     // Détection si le projectile entre dans un trigger (ex: trigger du Monster)
