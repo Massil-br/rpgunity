@@ -10,9 +10,19 @@ public class Projectile : MonoBehaviour
 
     private float _timer = 0;
     private readonly float _timeToDestroy = 10;
+    private Rigidbody2D rb ;
 
-    private CircleCollider2D _collider;
-    
+
+
+    void Start()
+    {
+            rb = gameObject.GetComponent<Rigidbody2D>();
+            rb.gravityScale = 0;
+            rb.bodyType = RigidbodyType2D.Dynamic;
+            rb.collisionDetectionMode = CollisionDetectionMode2D.Continuous; 
+            rb.interpolation = RigidbodyInterpolation2D.Interpolate; 
+            rb.freezeRotation = true;
+    }
 
     public void Initialize(Vector2 targetPosition, int attackDamage, string origin, Vector2 originVelocity)
     {
@@ -23,26 +33,13 @@ public class Projectile : MonoBehaviour
         Speed += projectedSpeed;
         if (originEntity == "Player"){
             GetComponent<SpriteRenderer>().color = Color.blue;
+            gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
+        }else{
+            gameObject.layer = LayerMask.NameToLayer("MonsterProjectile");
         }
         
 
-        _collider = GetComponent<CircleCollider2D>();
         
-
-        if (_collider != null)
-        {
-            _collider.enabled = false;
-            StartCoroutine(EnableColliderAfterDelay(0.2f)); // Active le collider après 0.2s
-        }
-    }
-
-    private IEnumerator EnableColliderAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        if (_collider != null)
-        {
-            _collider.enabled = true;
-        }
     }
 
     void Update()
@@ -53,37 +50,25 @@ public class Projectile : MonoBehaviour
             Destroy(gameObject);
         }
 
-        transform.position += (Vector3)direction * Speed * Time.deltaTime;
-    }
-
-    // Collision avec un objet ayant un Rigidbody (ex: le Player)
-    void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Projectile")) return;
-
-        if (originEntity == "Player" && collision.gameObject.CompareTag("Monster"))
-        {
-            collision.gameObject.GetComponent<MonsterStats>().TakeDamage(damage);
-            Debug.Log("Monster hit! Damage: " + damage);
-            Destroy(gameObject);
-        }
-        else if (originEntity == "Monster" && collision.gameObject.CompareTag("Player"))
-        {
-            collision.gameObject.GetComponent<Player>().TakeDamage(damage);
-            Debug.Log("Player hit! Damage: " + damage);
-            Destroy(gameObject);
-        }
         
+        rb.linearVelocity =direction * Speed;
     }
+void HandleCollision(GameObject target)
+    {       
+        
 
-    // Détection si le projectile entre dans un trigger (ex: trigger du Monster)
-    void OnTriggerEnter2D(Collider2D other)
-    {
-        if (originEntity == "Player" && other.gameObject.CompareTag("Monster"))
-        {
-            other.gameObject.GetComponent<MonsterStats>().TakeDamage(damage);
-            Debug.Log("Monster hit by player projectile! Damage: " + damage);
+        if (originEntity == "Player" && target.CompareTag("Monster")) {
+            target.GetComponent<MonsterStats>().TakeDamage(damage);
+            Debug.Log($"{target.name} hit! Damage: {damage}");
+            Destroy(gameObject);
+        }else if (originEntity == "Monster" && target.CompareTag("Player")){   
+            target.GetComponent<Player>().TakeDamage(damage);
+            Debug.Log($"{target.name} hit! Damage: {damage}");
+            Destroy(gameObject);
+        }else{
             Destroy(gameObject);
         }
     }
+
+    void OnCollisionEnter2D(Collision2D collision) => HandleCollision(collision.gameObject);
 }

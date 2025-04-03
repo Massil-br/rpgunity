@@ -60,7 +60,7 @@ public class Attack : MonoBehaviour
             {
                 MonsterStats stats = target.GetComponent<MonsterStats>();
                 target.GetComponent<MonsterAnimationHandler>().PlayTakeDamageAnimation();
-                stats.CurrentHealth -= _player.AttackDamage; // miguel attack damage clic droit 
+                stats.TakeDamage(_player.AttackDamage); // miguel attack damage clic droit 
             }
         }
     }

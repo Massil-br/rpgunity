@@ -23,6 +23,7 @@ public class MonsterStats : MonoBehaviour
     private Transform playerTransform;
 
     private Rigidbody2D _rigidbody;
+    private MonsterUiHandler _MonsterUiHandler;
 
 
 
@@ -34,6 +35,7 @@ public class MonsterStats : MonoBehaviour
         CurrentHealth = MaxHealth;
         playerTransform = Player.transform;
         _rigidbody = GetComponent<Rigidbody2D>();
+        _MonsterUiHandler = GetComponent<MonsterUiHandler>();
 
     }
 
@@ -129,7 +131,7 @@ public class MonsterStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         CurrentHealth -= damage;
-        
+        _MonsterUiHandler.ShowDamageTaken(damage);
     }
 
 }

@@ -29,30 +29,10 @@ public class PlayerUiHandler : MonoBehaviour
 
     void Update()
     {
-        
-        if(_healthDamageUiTimer >= 0){
-            _healthDamageUiTimer -= Time.deltaTime;
-            HealthDamageUi.SetActive(true);
-        }else {
-            HealthDamageUi.SetActive(false);
-        }
-
-        if (_xpDropUiTimer  >= 0){
-            _xpDropUiTimer -= Time.deltaTime;
-            XpDropUi.SetActive(true);
-        }else {
-            XpDropUi.SetActive(false);
-        }
-
-        if(_levelUpUiTimer >=  0){
-            _levelUpUiTimer -= Time.deltaTime;
-            LevelUpUi.SetActive(true);
-        }else{
-            LevelUpUi.SetActive(false);
-        }
-
-
-
+        UpdateHealthTimer();
+        UpdateXpTimer();
+        UpdateLevelUpTimer();
+  
     }
 
     public void ShowXpDropGained(int amount){
@@ -61,7 +41,7 @@ public class PlayerUiHandler : MonoBehaviour
     }
 
     public void ShowLevelUp(){
-        LevelUpUi.GetComponent<TMP_Text>().SetText($"LVL ⇑");
+        LevelUpUi.GetComponent<TMP_Text>().SetText($"LVL UP!");
         _levelUpUiTimer = DisplayTime;
     }
 
@@ -70,6 +50,35 @@ public class PlayerUiHandler : MonoBehaviour
         HealthDamageUi.GetComponent<TMP_Text>().SetText($"-{damage} HP");
         _healthDamageUiTimer = DisplayTime;
     }
+    
+    private void UpdateHealthTimer(){
+        if(_healthDamageUiTimer >= 0){
+            _healthDamageUiTimer -= Time.deltaTime;
+            HealthDamageUi.SetActive(true);
+        }else {
+            HealthDamageUi.SetActive(false);
+        }
+    }
 
+    private void UpdateXpTimer(){
+        if (_xpDropUiTimer  >= 0){
+            _xpDropUiTimer -= Time.deltaTime;
+            XpDropUi.SetActive(true);
+        }else {
+            XpDropUi.SetActive(false);
+        }
+
+    }
+
+
+    private void UpdateLevelUpTimer(){
+        if(_levelUpUiTimer >=  0){
+            _levelUpUiTimer -= Time.deltaTime;
+            LevelUpUi.SetActive(true);
+        }else{
+            LevelUpUi.SetActive(false);
+        }
+
+    }
     
 }
