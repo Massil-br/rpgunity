@@ -480,6 +480,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7814763950899693581, guid: 0f2aa3de0c17cd54e9af4a21fe7c48a9, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7814763950899693581, guid: 0f2aa3de0c17cd54e9af4a21fe7c48a9, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
@@ -674,6 +678,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -6063778221356760005, guid: 902ad0f9975c26a4ca3458d6f8b896ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: -6063778221356760005, guid: 902ad0f9975c26a4ca3458d6f8b896ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.066
+      objectReference: {fileID: 0}
     - target: {fileID: 1025511846725606013, guid: 902ad0f9975c26a4ca3458d6f8b896ba, type: 3}
       propertyPath: m_LocalScale.x
       value: 1
@@ -741,6 +753,14 @@ PrefabInstance:
     - target: {fileID: 3879760480450590087, guid: 902ad0f9975c26a4ca3458d6f8b896ba, type: 3}
       propertyPath: m_DrawMode
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960985872341192762, guid: 902ad0f9975c26a4ca3458d6f8b896ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960985872341192762, guid: 902ad0f9975c26a4ca3458d6f8b896ba, type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 1.066
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
