@@ -132,6 +132,7 @@ public class MonsterStats : MonoBehaviour
     {
         CurrentHealth -= damage;
         _MonsterUiHandler.ShowDamageTaken(damage);
+        GetComponent<MonsterAnimationHandler>().PlayTakeDamageAnimation();
     }
 
 }
