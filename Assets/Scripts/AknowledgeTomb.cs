@@ -25,7 +25,7 @@ public class AknowledgeTomb : MonoBehaviour
     void Update()
     {   
 
-        if (TopLeftInterract.activeSelf &&Input.GetKeyDown(KeyCode.E) && CanKillPlayer && Player.GetComponent<Player>().IsAlive){
+        if (TopLeftInterract.activeSelf &&Input.GetKeyDown(KeyCode.F) && CanKillPlayer && Player.GetComponent<Player>().IsAlive){
             
             Player.GetComponent<Player>().TakeDamage(Player.GetComponent<Player>().MaxHealthPoint);
            

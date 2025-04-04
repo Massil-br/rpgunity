@@ -839,6 +839,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1328650234}
     - target: {fileID: 3439851049579983281, guid: 938ed385eae4cc64a838f426953a1333, type: 3}
+      propertyPath: InterractMessage
+      value: Press F to pay Respect
+      objectReference: {fileID: 0}
+    - target: {fileID: 3439851049579983281, guid: 938ed385eae4cc64a838f426953a1333, type: 3}
       propertyPath: TopLeftInterract
       value: 
       objectReference: {fileID: 74348338}
