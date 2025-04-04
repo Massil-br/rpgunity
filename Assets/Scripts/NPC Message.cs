@@ -16,6 +16,8 @@ public class NPCMessage : MonoBehaviour
     
 
     [SerializeField]string ConvMessage;
+
+    private bool ActiveNpcMessage = false;
     
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -27,13 +29,15 @@ public class NPCMessage : MonoBehaviour
 
 
     void OnTriggerEnter2D(Collider2D collision)
-    {
+    {   
+        ActiveNpcMessage = true;
         TopLeftInterract.SetActive(true);
         TopLeftMessageUI.GetComponent<TMP_Text>().text = InterractMessage;
     }
 
     void OnTriggerExit2D(Collider2D collision)
-    {
+    {   
+        ActiveNpcMessage = false;
         TopLeftInterract.SetActive(false);
         ConversationUi.SetActive(false);
     }
@@ -42,17 +46,14 @@ public class NPCMessage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (TopLeftInterract.activeSelf){
-            if (Input.GetKeyDown(KeyCode.E)){
+        if (TopLeftInterract.activeSelf && Input.GetKeyDown(KeyCode.E) && ActiveNpcMessage){
                 if (!ConversationUi.activeSelf){
                     ConversationUi.SetActive(true);
                     
                 }else{
                     ConversationUi.SetActive(false);
                 }
-                
                 ConversationUiMsg.GetComponent<TMP_Text>().text = ConvMessage;
-            }
         }
     }
 }
