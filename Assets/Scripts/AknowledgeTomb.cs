@@ -23,8 +23,9 @@ public class AknowledgeTomb : MonoBehaviour
 
     // Update is called once per frame
     void Update()
-    {
-        if (TopLeftInterract.activeSelf &&Input.GetKeyDown(KeyCode.E) && CanKillPlayer){
+    {   
+
+        if (TopLeftInterract.activeSelf &&Input.GetKeyDown(KeyCode.E) && CanKillPlayer && Player.GetComponent<Player>().IsAlive){
             
             Player.GetComponent<Player>().TakeDamage(Player.GetComponent<Player>().MaxHealthPoint);
            
