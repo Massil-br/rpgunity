@@ -283,8 +283,8 @@ MonoBehaviour:
   Xp: 0
   NextLevelXp: 20
   NextLevelRatio: 1.5
-  TimeBetweenHealthRegen: 5
-  healthRegenAmount: 1
+  TimeBetweenHealthRegen: 3
+  healthRegenAmount: 2
   RegenActivated: 0
 --- !u!114 &2405790241551160856
 MonoBehaviour:
@@ -455,6 +455,8 @@ MonoBehaviour:
   HealthDamageUi: {fileID: 6713342900681158623}
   XpDropUi: {fileID: 6276207755927687515}
   LevelUpUi: {fileID: 254406572373727774}
+  CloseAttackUiCD: {fileID: 0}
+  ProjectileAttackUiCD: {fileID: 0}
   DisplayTime: 1
 --- !u!1 &3808598015673195587
 GameObject:

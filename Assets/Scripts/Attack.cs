@@ -63,6 +63,11 @@ public class Attack : MonoBehaviour
                 stats.TakeDamage(_player.AttackDamage); // miguel attack damage clic droit 
             }
         }
+
+        GetComponent<PlayerUiHandler>().UpdateCloseAttackCd(_closeAttackTimer, CloseAttackCoolDown);
+
+
+
     }
 
     private void LongDistAttack()
@@ -77,6 +82,8 @@ public class Attack : MonoBehaviour
             _longDistAttackTimer = LongDistAttackCoolDown;
             LaunchProjectile();
         }
+
+        GetComponent<PlayerUiHandler>().UpdateProjectileAttackCD(_longDistAttackTimer, LongDistAttackCoolDown);
     }
 
     private void LaunchProjectile()
