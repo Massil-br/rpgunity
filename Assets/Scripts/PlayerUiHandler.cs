@@ -18,7 +18,7 @@ public class PlayerUiHandler : MonoBehaviour
 
     [SerializeField] float DisplayTime = 1f;
 
-    
+    [SerializeField] GameObject AttackDamageTextUi;
 
     private float _healthDamageUiTimer   = 0f;
     private float _xpDropUiTimer = 0f;
@@ -64,6 +64,7 @@ public class PlayerUiHandler : MonoBehaviour
         UpdateHealthTimer();
         UpdateXpTimer();
         UpdateLevelUpTimer();
+        UpdateAttackDamageUi();
   
     }
 
@@ -111,6 +112,10 @@ public class PlayerUiHandler : MonoBehaviour
             LevelUpUi.SetActive(false);
         }
 
+    }
+
+    private void UpdateAttackDamageUi(){
+        AttackDamageTextUi.GetComponent<TMP_Text>().SetText($"{GetComponent<Player>().AttackDamage}");
     }
 
 
