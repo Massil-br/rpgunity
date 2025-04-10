@@ -161,6 +161,7 @@ public class Player : MonoBehaviour
     {
         CurrentHealthPoint -= damage;
         playerUiHandler.ShowHealthDamageTaken(damage);
+        GetComponent<PlayerAnimationHandler>().PlayHurtAnimation();
         
         if (CurrentHealthPoint <= 0)
         {

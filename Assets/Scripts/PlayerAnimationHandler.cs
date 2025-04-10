@@ -6,7 +6,12 @@ public class PlayerAnimationHandler : MonoBehaviour
     [SerializeField] GameObject FireAnimObject;
     
     Animator animator;
-    SpriteRenderer spriteRenderer;
+    SpriteRenderer FireBallspriteRenderer;
+    Color basePlayerColor;
+
+    private float _damageAnimationtimer = 0f;
+
+    [SerializeField] float PlayerHurtAnimationTime = 0.2f;
 
     readonly string takeDamageTrigger = "PlayerFireAttack";
 
@@ -14,15 +19,22 @@ public class PlayerAnimationHandler : MonoBehaviour
     void Start()
     {
         animator = FireAnimObject.GetComponent<Animator>();
-        spriteRenderer = FireAnimObject.GetComponent<SpriteRenderer>();
-        spriteRenderer.enabled = false;
+        FireBallspriteRenderer = FireAnimObject.GetComponent<SpriteRenderer>();
+        FireBallspriteRenderer.enabled = false;
+        basePlayerColor= GetComponent<SpriteRenderer>().color;
+
     }
 
-    
+    void Update()
+    {
+        UpdatePlayerHurtAnimation();
+    }
+
+
 
     public void PlayFireAttackAnimation()
     {
-        spriteRenderer.enabled = true;
+        FireBallspriteRenderer.enabled = true;
         animator.SetTrigger(takeDamageTrigger);
         StartCoroutine(DisableSpriteRendererAfterDelay());
     }
@@ -33,10 +45,23 @@ public class PlayerAnimationHandler : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
 
         // Disable the SpriteRenderer
-        spriteRenderer.enabled = false;
+        FireBallspriteRenderer.enabled = false;
+    }
+    
+
+    private void UpdatePlayerHurtAnimation(){
+       if(_damageAnimationtimer >=0 ){
+        _damageAnimationtimer -= Time.deltaTime;
+        GetComponent<SpriteRenderer>().color = Color.red;
+       }else{
+        GetComponent<SpriteRenderer>().color = basePlayerColor;
+       }
     }
 
+    public void PlayHurtAnimation(){
+        _damageAnimationtimer = PlayerHurtAnimationTime;
+    }
  
-
+    
 
 }
