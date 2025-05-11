@@ -118,20 +118,18 @@ public class MonsterStats : MonoBehaviour
         if (projectileScript == null){
             Debug.Log("!!! cannot get Projectile component iin projectile gameObject");
         }else{
-            projectileScript.Initialize(playerTransform.position, AttackDamage  , "Monster" , new Vector2(0,0)); // miguel pour l'attaque damage du monstre
+            projectileScript.Initialize(playerTransform.position, AttackDamage  , "Monster" , new Vector2(0,0));
             Debug.Log("Projectile successfully initialized");
         }
 
         
     }
 
-
-    
-
     public void TakeDamage(int damage)
     {
-        CurrentHealth -= damage;
-        _MonsterUiHandler.ShowDamageTaken(damage);
+        int trueDamage = Mathf.CeilToInt(damage*UnityEngine.Random.Range(0.75f,1.26f)*10); //formule variation dmg sur les mobs
+        CurrentHealth -= trueDamage;
+        _MonsterUiHandler.ShowDamageTaken(trueDamage);
         GetComponent<MonsterAnimationHandler>().PlayTakeDamageAnimation();
     }
 
