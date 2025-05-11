@@ -64,9 +64,10 @@ public class MonsterSpawner : MonoBehaviour
 
             
             monster.GetComponent<MonsterStats>().Spawner = gameObject;
-            monster.transform.position = new Vector3(Random.Range(transform.position.x-(bc.size.x/2),transform.position.x+(bc.size.x/2)),
-            Random.Range(transform.position.y-(bc.size.x/2),transform.position.y+(bc.size.x/2)),0);
-
+            monster.transform.position = new Vector3(
+            Random.Range(transform.position.x - (bc.size.x / 2), transform.position.x + (bc.size.x / 2)),
+            Random.Range(transform.position.y - (bc.size.y / 2), transform.position.y + (bc.size.y / 2)),
+            0);
 
             Canvas monsterCanvas = monster.GetComponentInChildren<Canvas>();
             if (monsterCanvas != null)
@@ -76,7 +77,7 @@ public class MonsterSpawner : MonoBehaviour
             }
 
             MonsterStats stats = monster.GetComponent<MonsterStats>();
-            stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth)*10*10; //Multiplication pv ennemi x10
+            stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth)*10; //Multiplication pv ennemi x10
             stats.CurrentHealth = stats.MaxHealth;
             stats.AttackDamage = Random.Range(MinimumAttackDamage, maximumAttackDamage)*Player.GetComponent<Player>().Level;
             stats.Player = Player;
