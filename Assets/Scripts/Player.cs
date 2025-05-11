@@ -166,8 +166,13 @@ public class Player : MonoBehaviour
         
         if (CurrentHealthPoint <= 0)
         {
-            IsAlive = false;
-            Debug.Log("you are dead");
+           PlayerDead(); 
         }
+    }
+
+
+    public void PlayerDead(){
+        IsAlive = false;
+        Debug.Log("you are dead");
     }
 }
