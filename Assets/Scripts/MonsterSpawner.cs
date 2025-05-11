@@ -69,7 +69,7 @@ public class MonsterSpawner : MonoBehaviour
             }
 
             MonsterStats stats = monster.GetComponent<MonsterStats>();
-            stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth);
+            stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth)*10; //Multiplication pv ennemi x10
             stats.CurrentHealth = stats.MaxHealth;
             stats.AttackDamage = Random.Range(MinimumAttackDamage, maximumAttackDamage);
             stats.Player = Player;

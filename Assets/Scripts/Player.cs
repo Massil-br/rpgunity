@@ -2,15 +2,18 @@ using System.Xml.XPath;
 using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 
+
 public class Player : MonoBehaviour
 {
     public bool IsAdmin;
     public int MaxHealthPoint;
+    public int MaxHealthPointCap = 150;
     public int CurrentHealthPoint;
 
     public int AttackDamage;
     public bool IsAlive;
     public int Level;
+    public int LevelCap = 20;
     public int Xp;
     public int NextLevelXp;
     public float NextLevelRatio;
@@ -62,32 +65,29 @@ public class Player : MonoBehaviour
             NextLevelXp = (int)(NextLevelXp * NextLevelRatio);
             playerUiHandler.ShowLevelUp();
 
-
-            // changer le level up pour choisir entre vitesse/ degats et hp avec une ui sur laquelle on clique
-
-            // Correctly update MaxHealthPoint and CurrentHealthPoint
-            int previousMaxHealth = MaxHealthPoint;
-            MaxHealthPoint = (int)(MaxHealthPoint * NextLevelRatio);
-            CurrentHealthPoint += MaxHealthPoint - previousMaxHealth;
-
-            
-
-            // Correctly update AttackDamage
-            AttackDamage = (int)(AttackDamage * NextLevelRatio);
+            //Lvl up system
+            if(Level%2 == 0){
+                if(MaxHealthPoint < MaxHealthPointCap){
+                    int previousMaxHealth = MaxHealthPoint;
+                    MaxHealthPoint += 10;
+                    CurrentHealthPoint += MaxHealthPoint - previousMaxHealth;
+                }
+            }else{
+                AttackDamage += 1;
+            }
 
         }
 
-        if (Level >= 20){
-            GetComponent<Attack>().CloseAttackCoolDown = 0.5f;
-        }
+        if(GetComponent<Cheat>().konami == false){
+            switch (Level) {
+                case 5 : GetComponent<Attack>().LongDistAttackCoolDown = 1.5f; break;
 
+                case 10 : GetComponent<Attack>().LongDistAttackCoolDown = 1f; break;
 
-        if (Level >= 15){
-            GetComponent<Attack>().LongDistAttackCoolDown = 0.5f;
-        }else if (Level >= 10){
-            GetComponent<Attack>().LongDistAttackCoolDown = 1f;
-        }else if (Level >= 5){
-            GetComponent<Attack>().LongDistAttackCoolDown = 1.5f;
+                case 15 : GetComponent<Attack>().LongDistAttackCoolDown = 0.5f; break;
+
+                case 20 : GetComponent<Attack>().CloseAttackCoolDown = 0.5f; break;
+            }
         }
     }
 
@@ -159,8 +159,9 @@ public class Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        CurrentHealthPoint -= damage;
-        playerUiHandler.ShowHealthDamageTaken(damage);
+        int trueDamage = Mathf.CeilToInt(damage*UnityEngine.Random.Range(0.5f,1.6f)); // Formule variation dmg sur le joueur
+        CurrentHealthPoint -= trueDamage; 
+        playerUiHandler.ShowHealthDamageTaken(trueDamage);
         GetComponent<PlayerAnimationHandler>().PlayHurtAnimation();
         
         if (CurrentHealthPoint <= 0)

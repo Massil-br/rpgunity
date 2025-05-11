@@ -55,8 +55,6 @@ public class Projectile : MonoBehaviour
     }
 void HandleCollision(GameObject target)
     {       
-        
-
         if (originEntity == "Player" && target.CompareTag("Monster")) {
             target.GetComponent<MonsterStats>().TakeDamage(damage);
             Debug.Log($"{target.name} hit! Damage: {damage}");

@@ -212,7 +212,8 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      w_longsword_steel_0: -3785588471738399508
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
