@@ -1,4 +1,5 @@
 using System.Xml.XPath;
+using Unity.VisualScripting;
 using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
 
@@ -22,6 +23,8 @@ public class Player : MonoBehaviour
     public float TimeBetweenHealthRegen ;
     public int healthRegenAmount ;
 
+    private Vector3 initialPosition;
+
     private PlayerUiHandler playerUiHandler;
 
     [SerializeField] bool RegenActivated  = false;
@@ -32,6 +35,7 @@ public class Player : MonoBehaviour
         IsAlive = true;
         Level = 1;
         playerUiHandler = GetComponent<PlayerUiHandler>();
+        initialPosition = transform.position;
     }
 
     // Update is called once per frame
@@ -174,5 +178,10 @@ public class Player : MonoBehaviour
     public void PlayerDead(){
         IsAlive = false;
         Debug.Log("you are dead");
+    }
+
+    public void Retry(){
+        Revive();
+        transform.position = initialPosition;
     }
 }
