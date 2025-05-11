@@ -10,6 +10,10 @@ public class MonsterSpawner : MonoBehaviour
     public int maximumAttackDamage;
     public string monsterName;
 
+    private int globalMonsterSpawned = 0;
+
+    [SerializeField] int GlobalMonsterSpawnLimit;
+
     public int MonstersLimit;
 
     public GameObject PrefabMonster;
@@ -53,9 +57,12 @@ public class MonsterSpawner : MonoBehaviour
             return;
         }
         _timer += Time.deltaTime;
-        if (_timer >= SpawnInterval && MonstersOnMap < MonstersLimit){
+        if (_timer >= SpawnInterval && MonstersOnMap < MonstersLimit &&   globalMonsterSpawned < GlobalMonsterSpawnLimit){
             GameObject monster = Instantiate(PrefabMonster);
             MonstersOnMap++ ;
+            globalMonsterSpawned++;
+
+            
             monster.GetComponent<MonsterStats>().Spawner = gameObject;
             monster.transform.position = new Vector3(Random.Range(transform.position.x-(bc.size.x/2),transform.position.x+(bc.size.x/2)),
             Random.Range(transform.position.y-(bc.size.x/2),transform.position.y+(bc.size.x/2)),0);
@@ -69,9 +76,9 @@ public class MonsterSpawner : MonoBehaviour
             }
 
             MonsterStats stats = monster.GetComponent<MonsterStats>();
-            stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth);
+            stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth)*10;
             stats.CurrentHealth = stats.MaxHealth;
-            stats.AttackDamage = Random.Range(MinimumAttackDamage, maximumAttackDamage);
+            stats.AttackDamage = Random.Range(MinimumAttackDamage, maximumAttackDamage)*Player.GetComponent<Player>().Level;
             stats.Player = Player;
 
             _timer = 0;
