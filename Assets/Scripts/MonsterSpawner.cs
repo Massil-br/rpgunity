@@ -12,6 +12,10 @@ public class MonsterSpawner : MonoBehaviour
 
     private int globalMonsterSpawned = 0;
 
+    [SerializeField]int MinimumXpDrop = 1;
+
+    [SerializeField] int MaximumXpDrop = 5;
+
     [SerializeField] int GlobalMonsterSpawnLimit;
 
     public int MonstersLimit;
@@ -68,6 +72,7 @@ public class MonsterSpawner : MonoBehaviour
             Random.Range(transform.position.x - (bc.size.x / 2), transform.position.x + (bc.size.x / 2)),
             Random.Range(transform.position.y - (bc.size.y / 2), transform.position.y + (bc.size.y / 2)),
             0);
+            
 
             Canvas monsterCanvas = monster.GetComponentInChildren<Canvas>();
             if (monsterCanvas != null)
@@ -80,6 +85,8 @@ public class MonsterSpawner : MonoBehaviour
             stats.MaxHealth = Random.Range(MinimumHealth,MaximumHealth)*10; //Multiplication pv ennemi x10
             stats.CurrentHealth = stats.MaxHealth;
             stats.AttackDamage = Random.Range(MinimumAttackDamage, maximumAttackDamage)*Player.GetComponent<Player>().Level;
+            stats.MinimumXpDrop = MinimumXpDrop;
+            stats.MaximumXpDrop = MaximumXpDrop;
             stats.Player = Player;
 
             _timer = 0;
