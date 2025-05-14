@@ -118,7 +118,17 @@ public class PlayerUiHandler : MonoBehaviour
         AttackDamageTextUi.GetComponent<TMP_Text>().SetText($"{GetComponent<Player>().AttackDamage}");
     }
 
+    public void ShowGameMode(string mode){
+        switch (mode) {
+            case "Hell" : 
+                HealthDamageUi.GetComponent<TMP_Text>().SetText($"Hell Mode !!!");
+                break;
 
+            case "Konami" :
+                XpDropUi.GetComponent<TMP_Text>().SetText($"Dev Mode !!!");
+                break;
+        }
+    }
     
     
 }

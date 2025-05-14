@@ -2,6 +2,8 @@ using System.Xml.XPath;
 using Unity.VisualScripting;
 using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
+using System;
+using System.Collections;
 
 
 public class Player : MonoBehaviour
@@ -23,9 +25,16 @@ public class Player : MonoBehaviour
     public float TimeBetweenHealthRegen ;
     public int healthRegenAmount ;
 
+    public float gameTime = 0f;
+    public bool isGameRunning = true;
+
     private Vector3 initialPosition;
 
     private PlayerUiHandler playerUiHandler;
+
+    public GameModePopup popup;
+    public FadeImage fade;
+    public DeathPopup death;
 
     [SerializeField] bool RegenActivated  = false;
 
@@ -36,6 +45,30 @@ public class Player : MonoBehaviour
         Level = 1;
         playerUiHandler = GetComponent<PlayerUiHandler>();
         initialPosition = transform.position;
+
+        if (popup == null)
+        {
+            popup = FindFirstObjectByType<GameModePopup>();
+        }
+        if (popup == null){
+            Debug.Log("Popup Skill issue");
+        }
+
+        if (fade == null)
+        {
+            fade = FindFirstObjectByType<FadeImage>();
+        }
+        if (fade == null){
+            Debug.Log("Fade Skill issue");
+        }
+
+        if (death == null)
+        {
+            death = FindFirstObjectByType<DeathPopup>();
+        }
+        if (death == null){
+            Debug.Log("Death Skill issue");
+        }
     }
 
     // Update is called once per frame
@@ -44,6 +77,15 @@ public class Player : MonoBehaviour
         CheckHealth();
         CheckLevelUp();
         AdminActions();
+        if (Input.GetKeyDown(KeyCode.Return))
+        {
+            isGameRunning = false;
+            popup.ShowPopup("The game is\npaused ! \n\n Use this time to\ntouch some grass !");
+        }
+        if (isGameRunning)
+        {
+            gameTime += Time.deltaTime;
+        }
     }
 
     private void CheckHealth()
@@ -84,9 +126,9 @@ public class Player : MonoBehaviour
 
         if(GetComponent<Cheat>().konami == false){
             switch (Level) {
-                case 5 : GetComponent<Attack>().LongDistAttackCoolDown = 1.5f; break;
+                case 5 : GetComponent<Attack>().LongDistAttackCoolDown = 1f; break;
 
-                case 10 : GetComponent<Attack>().LongDistAttackCoolDown = 1f; break;
+                case 10 : GetComponent<Attack>().LongDistAttackCoolDown = 0.75f; break;
 
                 case 15 : GetComponent<Attack>().LongDistAttackCoolDown = 0.5f; break;
 
@@ -176,8 +218,10 @@ public class Player : MonoBehaviour
 
 
     public void PlayerDead(){
+        isGameRunning = false;
         IsAlive = false;
         Debug.Log("you are dead");
+        fade.Skill_Issue();
     }
 
     public void Retry(){

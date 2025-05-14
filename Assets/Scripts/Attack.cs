@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class Attack : MonoBehaviour
 {   
-    public float LongDistAttackCoolDown = 2f;
+    public float LongDistAttackCoolDown = 1f;
     public float CloseAttackCoolDown = 1f;
 
     private float _longDistAttackTimer;

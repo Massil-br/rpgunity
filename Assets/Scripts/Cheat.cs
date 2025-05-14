@@ -4,16 +4,28 @@ using UnityEngine;
 public class Cheat : MonoBehaviour
 {
     public bool konami = false;
+    public GameModePopup popup;
 
     private readonly List<KeyCode> konamiCode = new List<KeyCode> {
         KeyCode.UpArrow, KeyCode.UpArrow,
         KeyCode.DownArrow, KeyCode.DownArrow,
         KeyCode.LeftArrow, KeyCode.RightArrow,
         KeyCode.LeftArrow, KeyCode.RightArrow,
-        KeyCode.B, KeyCode.A
+        KeyCode.B, KeyCode.Q
     };
 
     private List<KeyCode> inputBuffer = new List<KeyCode>();
+
+    void Start()
+    {
+        if (popup == null)
+        {
+            popup = FindFirstObjectByType<GameModePopup>();
+        }
+        if (popup == null){
+            Debug.Log("Skill issue");
+        }
+    }
 
     void Update()
     {
@@ -65,5 +77,8 @@ public class Cheat : MonoBehaviour
         GetComponent<Player>().MaxHealthPoint = 999;
         GetComponent<Player>().CurrentHealthPoint = 999;
         konami = true;
+        GetComponent<PlayerUiHandler>().ShowGameMode("Konami");
+
+        popup.ShowPopup("Dev Mode ! \n\nYou now have unlimited POWER\n\n Enjoy !");
     }
 }

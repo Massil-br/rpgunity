@@ -4,12 +4,24 @@ using UnityEngine;
 public class Hell : MonoBehaviour
 {
     public bool hell = false;
+    public GameModePopup popup;
 
     private readonly List<KeyCode> hellCode = new List<KeyCode> {
         KeyCode.H, KeyCode.E, KeyCode.L, KeyCode.L
     };
 
     private List<KeyCode> inputBuffer = new List<KeyCode>();
+
+    void Start()
+    {
+        if (popup == null)
+        {
+            popup = FindFirstObjectByType<GameModePopup>();
+        }
+        if (popup == null){
+            Debug.Log("Skill issue");
+        }
+    }
 
     void Update()
     {
@@ -59,5 +71,6 @@ public class Hell : MonoBehaviour
         GetComponent<Player>().MaxHealthPoint = 1;
         GetComponent<Player>().CurrentHealthPoint = 1;
         hell = true;
+        popup.ShowPopup("Hell Mode ! \n\nYour max health\nis now set to 1\n\n Enjoy !");
     }
 }
