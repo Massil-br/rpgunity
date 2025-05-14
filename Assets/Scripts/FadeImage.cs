@@ -66,6 +66,6 @@ public class FadeImage : MonoBehaviour
 
         imageToFade.gameObject.SetActive(false);
 
-        death.DeathScreen("You died ! \n\nYou should try\n to get some skill\n \"or maybe cheat\"");
+        death.DeathScreen("You died ! \n\nYou should try\n to get some skill\n\n \"or maybe cheat\"");
     }
 }
