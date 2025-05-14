@@ -60,7 +60,10 @@ public class MonsterSpawner : MonoBehaviour
         if (!IsActive){
             return;
         }
-        _timer += Time.deltaTime;
+        if (MonstersOnMap != MonstersLimit){
+            _timer += Time.deltaTime;
+        }
+        
         if (_timer >= SpawnInterval && MonstersOnMap < MonstersLimit &&   globalMonsterSpawned < GlobalMonsterSpawnLimit){
             GameObject monster = Instantiate(PrefabMonster);
             MonstersOnMap++ ;
