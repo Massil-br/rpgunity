@@ -119,7 +119,7 @@ public class Player : MonoBehaviour
                     CurrentHealthPoint += MaxHealthPoint - previousMaxHealth;
                 }
             }else{
-                AttackDamage += 1;
+                AttackDamage += 2;
             }
 
         }

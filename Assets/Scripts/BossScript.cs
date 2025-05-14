@@ -43,6 +43,8 @@ public class BossScript : MonoBehaviour
 
     [Header("LaunchScript")]
     [SerializeField]public bool StartBossScript = false;
+
+    public DeathPopup death;
     
     int pathStep = 0;
     //Timers
@@ -77,6 +79,14 @@ public class BossScript : MonoBehaviour
         backGroundWidth = BossHealthBarBackGround.GetComponent<RectTransform>().rect.width;
         healthBarRect = BossHealthBar.GetComponent<RectTransform>();
         healthBarWidth = healthBarRect.rect.width;
+
+        if (death == null)
+        {
+            death = FindFirstObjectByType<DeathPopup>();
+        }
+        if (death == null){
+            Debug.Log("Death Skill issue");
+        }
     }
 
 
@@ -93,9 +103,6 @@ public class BossScript : MonoBehaviour
             CheckHealth();
             HandlePathSteps();
         }
-        
-        
-
     }
 
     
@@ -110,6 +117,7 @@ public class BossScript : MonoBehaviour
 
     void BossDead(){
         isAlive = false;
+        death.DeathScreen("GG\n\nYou beat the\ndemo of this game !");
     }
 
 

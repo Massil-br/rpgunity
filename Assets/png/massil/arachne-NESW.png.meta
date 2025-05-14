@@ -487,7 +487,19 @@ TextureImporter:
     secondaryTextures: []
     spriteCustomMetadata:
       entries: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      arachne-NESW_0: -3339889798204341697
+      arachne-NESW_1: -4279243310226320746
+      arachne-NESW_10: -4007639050302379973
+      arachne-NESW_11: 7307540755077819939
+      arachne-NESW_2: 2147107130099072125
+      arachne-NESW_3: 2277336373748978624
+      arachne-NESW_4: -1831987906223916620
+      arachne-NESW_5: 2099357286912507193
+      arachne-NESW_6: -6073239116757547901
+      arachne-NESW_7: -7941231538440210316
+      arachne-NESW_8: 1084861646799794573
+      arachne-NESW_9: 4564821826763952571
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
