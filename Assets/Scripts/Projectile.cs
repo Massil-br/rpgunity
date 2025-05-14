@@ -34,8 +34,10 @@ public class Projectile : MonoBehaviour
         if (originEntity == "Player"){
             GetComponent<SpriteRenderer>().color = Color.blue;
             gameObject.layer = LayerMask.NameToLayer("PlayerProjectile");
-        }else{
+        }else if (originEntity == "Monster"){
             gameObject.layer = LayerMask.NameToLayer("MonsterProjectile");
+        }else{
+            gameObject.layer = LayerMask.NameToLayer("BossProjectile");
         }
         
 
@@ -55,11 +57,16 @@ public class Projectile : MonoBehaviour
     }
 void HandleCollision(GameObject target)
     {       
-        if (originEntity == "Player" && target.CompareTag("Monster")) {
-            target.GetComponent<MonsterStats>().TakeDamage(damage);
-            Debug.Log($"{target.name} hit! Damage: {damage}");
+        if (originEntity == "Player") {
+            if(target.CompareTag("Monster")){
+                target.GetComponent<MonsterStats>().TakeDamage(damage);
+                Debug.Log($"{target.name} hit! Damage: {damage}");
+            }else if(target.CompareTag("Boss")){
+                target.GetComponent<BossScript>().TakeDamage(damage);
+                Debug.Log($"{target.name} hit! Damage: {damage}");
+            }
             Destroy(gameObject);
-        }else if (originEntity == "Monster" && target.CompareTag("Player")){   
+        }else if ((originEntity == "Monster" || originEntity == "Boss" )&& target.CompareTag("Player")){   
             target.GetComponent<Player>().TakeDamage(damage);
             Debug.Log($"{target.name} hit! Damage: {damage}");
             Destroy(gameObject);
