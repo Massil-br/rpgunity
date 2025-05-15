@@ -245,7 +245,9 @@ public class BossScript : MonoBehaviour
     public void TakeDamage(int damage)
     {
         int trueDamage = Mathf.CeilToInt(damage*UnityEngine.Random.Range(0.75f,1.26f)*10); //formule variation dmg sur les mobs
-        
+        if (trueDamage > 60){
+            trueDamage = 60;
+        }
         Debug.Log(CurrentHealthPoint);
         Debug.Log(trueDamage);
         CurrentHealthPoint -= trueDamage;
