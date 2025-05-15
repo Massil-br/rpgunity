@@ -1,9 +1,4 @@
-using System.Xml.XPath;
-using Unity.VisualScripting;
-using UnityEditor.SpeedTree.Importer;
 using UnityEngine;
-using System;
-using System.Collections;
 
 
 public class Player : MonoBehaviour

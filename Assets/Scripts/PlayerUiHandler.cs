@@ -1,9 +1,5 @@
-using Microsoft.Unity.VisualStudio.Editor;
 using TMPro;
-using UnityEditor.Experimental.GraphView;
 using UnityEngine;
-using UnityEngine.UI;
-using UnityEngine.UIElements;
 
 public class PlayerUiHandler : MonoBehaviour
 {
